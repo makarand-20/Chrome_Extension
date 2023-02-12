@@ -48,7 +48,7 @@ tabbtn.addEventListener("click", function(){
 
 inputallBtn.addEventListener("click", function(){
     chrome.tabs.query({}, function(tabs) {
-        for (var i = tabs.length - 1; i >= 0; i--) {
+        for (var i = 0; i < tabs.length; i++) {
           myLinks.push(tabs[i].url)
           localStorage.setItem("myLinks", JSON.stringify(myLinks) )
           render(myLinks)
