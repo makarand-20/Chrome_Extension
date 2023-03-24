@@ -25,16 +25,26 @@ shareButton.addEventListener('click', async () => {
     }
 });
 
-  
 
 const whatsappShareButton = document.getElementById('whatsapp-share-button');
-        const message = window.location.href;
+    whatsappShareButton.addEventListener('click', function(){
+        chrome.tabs.query({currentWindow: true}, function(tabs){
 
-        whatsappShareButton.addEventListener('click', () => {
-        const whatsappUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-});
+            const tabText = tabs.map((tab) => {
+                return `${tab.title}: ${tab.url}`;
+            }).join('\n');  
+        
+            // Create a share URL with the tab information
+            const shareUrl = `https://web.whatsapp://send?text=${encodeURIComponent(tabText)}`;
+        
+            // Open the share URL in a new tab
+            chrome.tabs.create({url: shareUrl}, (tab) => {
+            console.log('WhatsApp share tab created:', tab);
+            });
+        });
+    });
 
+// Get all tabs in the current window
 
 
 const linksFromLocalStorage = JSON.parse( localStorage.getItem("myLinks") )
