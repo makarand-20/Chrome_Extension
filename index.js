@@ -9,6 +9,32 @@ let openbtn = document.getElementById("openbtn")
 
 const userName = document.querySelector("#searchbar")
 
+const shareButton = document.getElementById('share-button');
+
+
+shareButton.addEventListener('click', async () => {
+try {
+    await navigator.share({
+    title: 'Title of shared content',
+    text: 'Text of shared content',
+    url: 'https://example.com/shared-content'
+    });
+    console.log('Content shared successfully');
+} catch (error) {
+    console.error('Error sharing content:', error);
+}
+});
+
+const whatsappShareButton = document.getElementById('whatsapp-share-button');
+        const message = window.location.href;
+
+        whatsappShareButton.addEventListener('click', () => {
+        const whatsappUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+});
+
+
+
 const linksFromLocalStorage = JSON.parse( localStorage.getItem("myLinks") )
 
 if (linksFromLocalStorage) {
