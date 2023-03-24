@@ -13,17 +13,19 @@ const shareButton = document.getElementById('share-button');
 
 
 shareButton.addEventListener('click', async () => {
-try {
-    await navigator.share({
-    title: 'Title of shared content',
-    text: 'Text of shared content',
-    url: 'https://example.com/shared-content'
-    });
-    console.log('Content shared successfully');
-} catch (error) {
-    console.error('Error sharing content:', error);
-}
+    try {
+        await navigator.share({
+        title: 'Title of shared content',
+        text: 'Text of shared content',
+        url: 'https://example.com/shared-content'
+        });
+        console.log('Content shared successfully');
+    } catch (error) {
+        console.error('Error sharing content:', error);
+    }
 });
+
+  
 
 const whatsappShareButton = document.getElementById('whatsapp-share-button');
         const message = window.location.href;
